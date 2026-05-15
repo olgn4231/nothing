@@ -1,0 +1,8 @@
+{
+  "GEMINI_API_KEY": "",
+  "AI_PROVIDER": "gemini",
+  "OPENROUTER_API_KEY": "",
+  "OPENROUTER_MODEL": "mistralai/mistral-7b-instruct:free",
+  "GROQ_API_KEY": "",
+  "GROQ_MODEL": "llama-3.3-70b-versatile"
+}

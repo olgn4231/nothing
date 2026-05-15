@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+jinja2
+playwright
+google-genai
+python-multipart
+python-dotenv

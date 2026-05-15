@@ -1,0 +1,8 @@
+{
+  "GEMINI_API_KEY": "Parse error: Unexpected indentation",
+  "AI_PROVIDER": "gemini",
+  "OPENROUTER_API_KEY": "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",
+  "OPENROUTER_MODEL": "mistralai/mistral-7b-instruct:free",
+  "GROQ_API_KEY": "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",
+  "GROQ_MODEL": "llama-3.3-70b-versatile"
+}
