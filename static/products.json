@@ -1,0 +1,16 @@
+[
+  {
+    "id": "p1",
+    "name": "Anna Classic",
+    "price": 199.99,
+    "image": "file:///C:/Users/olgn4/.gemini/antigravity/brain/006a85b1-6f66-492f-9585-6f88ef4e3d5e/anna_eyeglass_1_1777917261546.png",
+    "description": "Elegant classic frames for everyday wear."
+  },
+  {
+    "id": "p2",
+    "name": "Anna Sport",
+    "price": 249.99,
+    "image": "file:///C:/Users/olgn4/.gemini/antigravity/brain/006a85b1-6f66-492f-9585-6f88ef4e3d5e/anna_eyeglass_1_1777917261546.png",
+    "description": "Lightweight sport frames with modern style."
+  }
+]

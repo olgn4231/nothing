@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Auto Sale Xe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="glass-container">
+        <div class="header">
+            <h1>Auto Sale Trí Tuệ Nhân Tạo 🚀</h1>
+            <p>Tự động đăng bài nhóm & Lên chiến dịch Ads</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" id="btnTabDashboard" onclick="switchTab('dashboard')">Dashboard</button>
+            <button class="tab-btn" id="btnTabAutomation" onclick="switchTab('automation')">Cấu Hình Đăng Bài</button>
+        </div>
+
+        <!-- TAB: DASHBOARD -->
+        <div id="tab-dashboard" class="tab-pane active" style="display:block;">
+            <div class="form-section">
+                <h2>Thống kê dữ liệu hệ thống</h2>
+                <div class="stats-cards" style="display:flex; gap:15px; margin-bottom:20px;">
+                    <div class="stat-card" style="flex:1; background:rgba(255,255,255,0.05); padding:15px; border-radius:8px; border:1px solid rgba(255,255,255,0.1); text-align:center;">
+                        <div id="dbTotalGroups" style="font-size:32px; font-weight:bold; color:#7dd3fc; margin-bottom:5px;">0</div>
+                        <div style="font-size:12px; color:#a1a1aa;">Nhóm FB đã lưu (Database)</div>
+                    </div>
+                </div>
+                <button onclick="loadDashboardStats()" style="width:auto; padding:8px 15px; font-size:13px; background:rgba(0,0,0,0.3); border:1px solid #7dd3fc; margin-bottom:15px;">🔄 Refresh Dữ Liệu</button>
+                <div style="max-height:300px; overflow-y:auto; border:1px solid rgba(255,255,255,0.1); border-radius:6px; background:rgba(0,0,0,0.2);">
+                    <table style="width:100%; border-collapse:collapse; font-size:13px; text-align:left;">
+                        <thead style="background:rgba(255,255,255,0.05);">
+                            <tr>
+                                <th style="padding:10px; border-bottom:1px solid rgba(255,255,255,0.1);">Tên Nhóm</th>
+                                <th style="padding:10px; border-bottom:1px solid rgba(255,255,255,0.1);">Đường Dẫn</th>
+                            </tr>
+                        </thead>
+                        <tbody id="groupTableBody">
+                            <tr><td colspan="2" style="padding:10px; text-align:center; color:#a1a1aa;">Đang tải...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- TAB: AUTOMATION -->
+        <div id="tab-automation" class="tab-pane" style="display:none;">
+            <form id="automatorForm" enctype="multipart/form-data">
+                <!-- Cấu hình Tài khoản / Mật khẩu -->
+                <div class="form-section">
+                    <h2>1. Thông tin Đăng Bài Tự Động Facebook</h2>
+                    <div class="input-group">
+                        <label style="display:flex; align-items:center; gap:8px; font-size:14px; margin-bottom:10px; cursor:pointer;">
+                            <input type="checkbox" id="auto_fetch_groups" name="auto_fetch_groups" value="true" style="width:18px;height:18px;cursor:pointer;">
+                            <span style="color:#7dd3fc; font-weight:600;">🤖 Cào danh sách TẤT CẢ Group đã tham gia (Save CSDL)</span>
+                        </label>
+
+                    </div>
+
+                    <div class="input-group">
+                        <label for="fb_target_url" style="font-size: 13px; color: #a1a1aa; display: block; margin-bottom: 6px;">🔗 Danh sách Link (Nếu KHÔNG dùng bộ 'Cào danh sách toàn bộ Group' ở trên):</label>
+                        <textarea id="fb_target_url" name="fb_target_url" rows="3" placeholder="https://www.facebook.com/groups/xxxxx&#10;https://www.facebook.com/truongquocbao"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="post_delay" style="font-size: 13px; color: #a1a1aa; display: block; margin-bottom: 6px;">⏳ Quãng nghỉ an toàn giữa các bài (Giây):</label>
+                        <input type="number" id="post_delay" name="post_delay" value="15" min="1" max="300" required>
+                    </div>
+                </div>
+
+                <!-- Thuộc tính Xe Máy học phân tích -->
+                <div class="form-section">
+                    <h2>2. Thông tin Xe & Content Gốc</h2>
+                    <div class="input-group">
+                        <label for="car_images" style="font-size: 13px; color: #a1a1aa; display: block; margin-bottom: 6px;">🖼️ Khung gửi hình ảnh xe (Nhiều ảnh):</label>
+                        <input type="file" id="car_images" name="car_images" accept="image/*" multiple>
+                    </div>
+
+
+                </div>
+
+                <!-- Ads Plan -->
+                <div class="form-section">
+                    <h2>3. Định vị Quảng Cáo Ads (AI Tự Cân Đối Số Dư)</h2>
+                    <div class="input-group">
+                        <select id="car_segment" name="car_segment" required>
+                            <option value="" disabled selected>Chọn phân khúc xe (ML Target)</option>
+                            <option value="economy">Phổ thông / Dịch vụ (Hạng A, B)</option>
+                            <option value="family">Gia đình / Đa dụng (MPV, SUV / Hạng C)</option>
+                            <option value="luxury">Xe Sang / Thể thao (Luxury Brand)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- BƯỚC 1: NHẬP NỘI DUNG -->
+                <div class="form-section">
+                    <h2>4. Nhập Nội Dung Bài Đăng</h2>
+                    <div class="input-group">
+                        <label for="final_caption" style="font-size: 13px; color: #a1a1aa; display: block; margin-bottom: 6px;">📝 Nội dung bài đăng:</label>
+                        <textarea id="final_caption" name="final_caption" rows="8" placeholder="Bạn viết nội dung bài vào đây..." required></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" id="submitBtn">
+                    <span id="btnText">🚀 Bước 2: Bắt Đầu Đăng Bài FB</span>
+                    <div class="loader" id="loader" style="display: none;"></div>
+                </button>
+            </form>
+
+            <div id="progressWrap" class="progress-wrap" style="display: none;" aria-live="polite">
+                <div class="progress-track">
+                    <div id="progressBar" class="progress-bar"></div>
+                </div>
+                <p id="progressLabel" class="progress-label"></p>
+            </div>
+
+            <div id="statusBox" class="status-box" style="display: none;">
+                <!-- Nhật ký trạng thái hiện tại -->
+            </div>
+        </div>
+    </div>
+
+
+    <script src="/static/app.js?v=5"></script>
+</body>
+</html>
